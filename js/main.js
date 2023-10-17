@@ -53,13 +53,25 @@ async function buscarEnAPI(criterio) {
         if (response.ok) {
             const data = await response.json();
 
-            if (data.length === 0) {
-                console.log("No se encontraron resultados.");
-                body.innerHTML = "No se encontraron resultados.";
+        if (data.length === 0) {
+            console.log("No se encontraron resultados.");
+            body.innerHTML = "No se encontraron resultados.";
             } else {
                 console.log("Resultados encontrados:");
-                body.innerHTML = data.map(planet => `Nombre: ${planet.name}, Clima: ${planet.climate}, Terreno: ${planet.terrain}`).join('<br>');
-            }
+                body.innerHTML = data.map(planet => `
+                Nombre: ${planet.name},
+                Masa: ${planet.mass},
+                Radio: ${planet.radius},
+                Período Orbital: ${planet.period} días,
+                Semieje Mayor: ${planet.semi_major_axis} AU,
+                Temperatura: ${planet.temperature} K,
+                Distancia en Años Luz: ${planet.distance_light_year},
+                Masa de la Estrella Anfitriona: ${planet.host_star_mass} Masa Solar,
+                Temperatura de la Estrella Anfitriona: ${planet.host_star_temperature} K
+                `).join('<br>');
+}
+
+
 
             if (criterio.trim() !== "") {
                 busquedasAnteriores.unshift(criterio);

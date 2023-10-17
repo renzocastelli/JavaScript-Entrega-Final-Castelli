@@ -23,5 +23,7 @@ h1 {
 }
 
 .results {
+    margin-left: -64px;
+    white-space: pre-wrap;
     color: brown
 }
