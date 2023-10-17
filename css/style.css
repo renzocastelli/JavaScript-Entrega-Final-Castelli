@@ -1,0 +1,27 @@
+* {
+    background-color: pink;
+}
+
+.body {
+    background-color: royalblue;
+}
+
+h1 {
+    text-align: center;
+    background-color: royalblue;
+}
+
+.button {
+    background-color: paleturquoise;
+    margin-bottom: 10px;
+    margin-left: 10px
+}
+
+.search {
+    margin-left: 10px;
+    background-color: paleturquoise
+}
+
+.results {
+    color: brown
+}

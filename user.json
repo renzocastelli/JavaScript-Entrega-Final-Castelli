@@ -1,0 +1,11 @@
+[
+    {
+    "nombre": "rtx3070", "precio" : 500, "descripcion" : "placa potente"
+    },
+    {
+    "nombre" : "radeon7600", "precio" : 450, "descripcion" : "placa media"
+    },
+    {
+    "nombre" : "radeon7600", "precio" : 450, "descripcion" : "placa media" 
+    }
+]   
