@@ -18,12 +18,11 @@ h1 {
 }
 
 .search {
-    margin-left: 10px;
-    background-color: paleturquoise
+    background-color: paleturquoise;
+    margin: 5px;
 }
 
 .results {
-    margin-left: -64px;
     white-space: pre-wrap;
     color: brown
 }

@@ -6,6 +6,7 @@ const searchInput = document.getElementById("searchInput");
 
 const searchButton = document.getElementById("searchButton");
 
+
 let busquedasAnteriores = JSON.parse(localStorage.getItem("busquedas")) || [];
 mostrarHistorial();
 
