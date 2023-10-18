@@ -8,8 +8,20 @@ let busquedasAnteriores = JSON.parse(localStorage.getItem("busquedas")) || [];
 mostrarHistorial();
 
 function mostrarHistorial() {
-
+    historyDiv.innerHTML = "Historial de Búsquedas:";
+    if (busquedasAnteriores.length > 0) {
+    const historialLista = document.createElement("ul");
+    busquedasAnteriores.forEach(busqueda => {
+    const listItem = document.createElement("li");
+    listItem.textContent = busqueda;
+    historialLista.appendChild(listItem);
+    });
+    historyDiv.appendChild(historialLista);
+    } else {
+    historyDiv.innerHTML += " No hay búsquedas anteriores.";
+    }
 }
+
 
 searchButton.addEventListener("click", function() {
     const criterioBusqueda = searchInput.value;
