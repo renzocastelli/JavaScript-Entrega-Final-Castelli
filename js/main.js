@@ -1,11 +1,7 @@
 const body = document.getElementById("results");
-
 const historyDiv = document.getElementById("history");
-
 const searchInput = document.getElementById("searchInput");
-
 const searchButton = document.getElementById("searchButton");
-
 
 let busquedasAnteriores = JSON.parse(localStorage.getItem("busquedas")) || [];
 mostrarHistorial();
@@ -33,7 +29,11 @@ searchButton.addEventListener("click", function() {
 searchInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         const criterioBusqueda = searchInput.value;
-        buscarEnAPI(criterioBusqueda);
+        if (criterioBusqueda.trim() !== "") {
+            buscarEnAPI(criterioBusqueda);
+        } else {
+            body.innerHTML = "";
+        }
     } else {
         mostrarHistorial();
     }
@@ -54,9 +54,9 @@ async function buscarEnAPI(criterio) {
         if (response.ok) {
             const data = await response.json();
 
-        if (data.length === 0) {
-            console.log("No se encontraron resultados.");
-            body.innerHTML = "No se encontraron resultados.";
+            if (data.length === 0) {
+                console.log("No se encontraron resultados.");
+                body.innerHTML = "No se encontraron resultados.";
             } else {
                 console.log("Resultados encontrados:");
                 body.innerHTML = data.map(planet => `
@@ -70,9 +70,7 @@ async function buscarEnAPI(criterio) {
                 Masa de la Estrella Anfitriona: ${planet.host_star_mass} Masa Solar,
                 Temperatura de la Estrella Anfitriona: ${planet.host_star_temperature} K
                 `).join('<br>');
-}
-
-
+            }
 
             if (criterio.trim() !== "") {
                 busquedasAnteriores.unshift(criterio);
