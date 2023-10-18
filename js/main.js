@@ -2,27 +2,18 @@ const body = document.getElementById("results");
 const historyDiv = document.getElementById("history");
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
+const loading = document.getElementById("loading");
 
 let busquedasAnteriores = JSON.parse(localStorage.getItem("busquedas")) || [];
 mostrarHistorial();
 
 function mostrarHistorial() {
-    historyDiv.innerHTML = "Historial de Búsquedas:";
-    if (busquedasAnteriores.length > 0) {
-        const historialLista = document.createElement("ul");
-        busquedasAnteriores.forEach(busqueda => {
-            const listItem = document.createElement("li");
-            listItem.textContent = busqueda;
-            historialLista.appendChild(listItem);
-        });
-        historyDiv.appendChild(historialLista);
-    } else {
-        historyDiv.innerHTML += " No hay búsquedas anteriores.";
-    }
+
 }
 
 searchButton.addEventListener("click", function() {
     const criterioBusqueda = searchInput.value;
+    mostrarCarga();
     buscarEnAPI(criterioBusqueda);
 });
 
@@ -30,6 +21,7 @@ searchInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         const criterioBusqueda = searchInput.value;
         if (criterioBusqueda.trim() !== "") {
+            mostrarCarga();
             buscarEnAPI(criterioBusqueda);
         } else {
             body.innerHTML = "";
@@ -40,6 +32,8 @@ searchInput.addEventListener("keyup", function(event) {
 });
 
 async function buscarEnAPI(criterio) {
+    mostrarCarga();
+
     const name = criterio;
     const apiKey = 'ST86ypj8g/INskI32xtZ9g==baSZI0LnW5EgfCT4';
 
@@ -82,5 +76,15 @@ async function buscarEnAPI(criterio) {
         }
     } catch (error) {
         console.error("Error al obtener los resultados de la API:", error);
+    } finally {
+        ocultarCarga();
     }
+}
+
+function mostrarCarga() {
+    loading.style.display = "block";
+}
+
+function ocultarCarga() {
+    loading.style.display = "none";
 }
